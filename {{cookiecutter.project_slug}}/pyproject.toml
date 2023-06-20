@@ -107,12 +107,10 @@ argon2-cffi = "^21.3.0"
 {%- if cookiecutter.use_whitenoise == "y" %}
 whitenoise = "^6.5.0"
 {%- endif %}
-{%- if cookiecutter.use_redis == "y" %}
-redis = "^4.5.5"
-{%- endif %}
 {%- if cookiecutter.use_celery == "y" %}
 celery = "^5.3.1"
 django-celery-beat = "^2.5.0"
+redis = "^4.5.5"
 {%- endif %}
 django = "^4.2.2"
 django-environ = "^0.10.0"
