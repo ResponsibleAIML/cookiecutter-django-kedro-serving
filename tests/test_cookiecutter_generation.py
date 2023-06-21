@@ -121,6 +121,8 @@ SUPPORTED_COMBINATIONS = [
     {"use_whitenoise": "n"},
     {"use_heroku": "y"},
     {"use_heroku": "n"},
+    {"use_kedro": "y"},
+    {"use_kedro": "n"},
     {"ci_tool": "None"},
     {"ci_tool": "Travis"},
     {"ci_tool": "Gitlab"},
@@ -360,6 +362,27 @@ def test_pycharm_docs_removed(cookies, context, use_pycharm, pycharm_docs_exist)
     with open(f"{result.project_path}/docs/index.rst") as f:
         has_pycharm_docs = "pycharm/configuration" in f.read()
         assert has_pycharm_docs is pycharm_docs_exist
+
+
+@pytest.mark.parametrize("use_kedro", ["n", "y"])
+def test_kedro_in_pyproject(cookies, context, use_kedro):
+    context.update({"use_kedro": use_kedro})
+    result = cookies.bake(extra_context=context)
+    pyproject_contents = result.project.join("pyproject.toml").read()
+    kedro_package_check_list = ["kedro", "kedro-datasets", "kedro-airflow", "kedro-mlflow"]
+
+    print(pyproject_contents)
+    print(kedro_package_check_list)
+    print(any([x in pyproject_contents for x in kedro_package_check_list]))
+    print(context.get("use_kedro"))
+    print(use_kedro)
+    print(any([x in pyproject_contents for x in kedro_package_check_list]) == (context.get("use_kedro") == use_kedro))
+
+    if use_kedro == "y":
+        assert all([x in pyproject_contents for x in kedro_package_check_list]) == True
+    else:
+        assert any([x in pyproject_contents for x in kedro_package_check_list]) == False
+
 
 
 def test_trim_domain_email(cookies, context):
