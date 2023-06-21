@@ -368,7 +368,7 @@ def test_pycharm_docs_removed(cookies, context, use_pycharm, pycharm_docs_exist)
 def test_kedro_in_pyproject(cookies, context, use_kedro):
     context.update({"use_kedro": use_kedro})
     result = cookies.bake(extra_context=context)
-    pyproject_contents = result.project.join("pyproject.toml").read()
+    pyproject_contents = result.project_path.joinpath("pyproject.toml").read_text()
     kedro_package_check_list = ["kedro", "kedro-datasets", "kedro-airflow", "kedro-mlflow"]
 
     if use_kedro == "y":
