@@ -371,18 +371,10 @@ def test_kedro_in_pyproject(cookies, context, use_kedro):
     pyproject_contents = result.project.join("pyproject.toml").read()
     kedro_package_check_list = ["kedro", "kedro-datasets", "kedro-airflow", "kedro-mlflow"]
 
-    print(pyproject_contents)
-    print(kedro_package_check_list)
-    print(any([x in pyproject_contents for x in kedro_package_check_list]))
-    print(context.get("use_kedro"))
-    print(use_kedro)
-    print(any([x in pyproject_contents for x in kedro_package_check_list]) == (context.get("use_kedro") == use_kedro))
-
     if use_kedro == "y":
         assert all([x in pyproject_contents for x in kedro_package_check_list]) == True
     else:
         assert any([x in pyproject_contents for x in kedro_package_check_list]) == False
-
 
 
 def test_trim_domain_email(cookies, context):
