@@ -414,6 +414,9 @@ def run_poetry_install():
     os.system("poetry install")
     print("Listing installed dependencies...")
     os.system("poetry show")
+
+
+def install_precommit():
     print("Initializing a git repository...")
     os.system("git init")
     print("Installing pre-commit hooks...")
@@ -518,6 +521,11 @@ def main():
         run_poetry_install()
     else:
         print("You will now need to manually install the dependencies with your preferred tool.")
+
+    if "{{ cookiecutter.use_precommit }}".lower() == "y":
+        install_precommit()
+    else:
+        print("You will now need to manually initialize a git repository and install pre-commit hooks.")
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 
