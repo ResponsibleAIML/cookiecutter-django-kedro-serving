@@ -410,8 +410,12 @@ def remove_storages_module():
 
 
 def run_poetry_install():
-    # poetry install
+    print("Installing dependencies with Poetry...")
     os.system("poetry install")
+    print("Installing pre-commit hooks...")
+    os.system("poetry run pre-commit install")
+    print("Listing installed dependencies...")
+    os.system("poetry show")
 
 
 def main():
@@ -502,7 +506,6 @@ def main():
         remove_async_files()
 
     if "{{ cookiecutter.use_poetry }}".lower() == "y":
-        print("Installing dependencies with Poetry...")
         run_poetry_install()
     else:
         print("You will now need to manually install the dependencies with your preferred tool.")
