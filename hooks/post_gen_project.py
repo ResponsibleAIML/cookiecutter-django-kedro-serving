@@ -502,6 +502,7 @@ def main():
         remove_async_files()
 
     if "{{ cookiecutter.use_poetry }}".lower() == "y":
+        print("Installing dependencies with Poetry...")
         run_poetry_install()
     else:
         print("You will now need to manually install the dependencies with your preferred tool.")
