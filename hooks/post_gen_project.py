@@ -418,6 +418,13 @@ def run_poetry_install():
     os.system("git init")
     print("Installing pre-commit hooks...")
     os.system("poetry run pre-commit install")
+    print("Validating pre-commit hooks...")
+    os.system("pre-commit validate-config .pre-commit-config.yaml")
+    print("Auto-updating pre-commit hooks...")
+    os.system("pre-commit autoupdate")
+    print("Cleaning pre-commit hooks...")
+    os.system("pre-commit clean")
+    os.system("pre-commit gc")
 
 
 def main():
