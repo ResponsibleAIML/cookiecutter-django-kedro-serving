@@ -412,10 +412,14 @@ def remove_storages_module():
 def run_poetry_install():
     print("Installing dependencies with Poetry...")
     os.system("poetry install")
-    print("Installing pre-commit hooks...")
-    os.system("poetry run pre-commit install")
     print("Listing installed dependencies...")
     os.system("poetry show")
+
+    print(f"Current directory before chdir: {os.getcwd()}")
+    os.chdir("{{cookiecutter.project_slug}}")
+    print(f"Current directory after chdir: {os.getcwd()}")
+    print("Installing pre-commit hooks...")
+    os.system("poetry run pre-commit install")
 
 
 def main():
