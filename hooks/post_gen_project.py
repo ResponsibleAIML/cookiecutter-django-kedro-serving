@@ -414,10 +414,8 @@ def run_poetry_install():
     os.system("poetry install")
     print("Listing installed dependencies...")
     os.system("poetry show")
-
-    print(f"Current directory before chdir: {os.getcwd()}")
-    os.chdir("{{cookiecutter.project_slug}}")
-    print(f"Current directory after chdir: {os.getcwd()}")
+    print("Initializing a git repository...")
+    os.system("git init")
     print("Installing pre-commit hooks...")
     os.system("poetry run pre-commit install")
 
