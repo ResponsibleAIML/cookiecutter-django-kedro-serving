@@ -40,6 +40,7 @@
   "use_whitenoise": "n",
   "use_heroku": "n",
   "use_kedro": "y",
+  "use_poetry": "y",
   "ci_tool": ["None", "Travis", "Gitlab", "Github"],
   "keep_local_envs_in_vcs": "y",
   "debug": "n"

@@ -409,6 +409,11 @@ def remove_storages_module():
     os.remove(os.path.join("{{cookiecutter.project_slug}}", "utils", "storages.py"))
 
 
+def run_poetry_install():
+    # poetry install
+    os.system("poetry install")
+
+
 def main():
     debug = "{{ cookiecutter.debug }}".lower() == "y"
 
@@ -495,6 +500,11 @@ def main():
 
     if "{{ cookiecutter.use_async }}".lower() == "n":
         remove_async_files()
+
+    if "{{ cookiecutter.use_poetry }}".lower() == "y":
+        run_poetry_install()
+    else:
+        print("You will now need to manually install the dependencies with your preferred tool.")
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 
