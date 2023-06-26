@@ -462,25 +462,19 @@ def main():
     if "{{ cookiecutter.use_heroku }}".lower() == "n":
         remove_heroku_files()
 
-    # if "{{ cookiecutter.use_docker }}".lower() == "n" and "{{ cookiecutter.use_heroku }}".lower() == "n":
-    #     if "{{ cookiecutter.keep_local_envs_in_vcs }}".lower() == "y":
-    #         print(
-    #             INFO + ".env(s) are only utilized when Docker Compose and/or "
-    #             "Heroku support is enabled so keeping them does not "
-    #             "make sense given your current setup." + TERMINATOR
-    #         )
-    #     remove_envs_and_associated_files()
-    # else:
-    #     append_to_gitignore_file(".env")
-    #     append_to_gitignore_file(".envs/*")
-    #     if "{{ cookiecutter.keep_local_envs_in_vcs }}".lower() == "y":
-    #         append_to_gitignore_file("!.envs/.local/")
-
-    append_to_gitignore_file(".env")
-    append_to_gitignore_file(".envs/*")
-
-    if "{{ cookiecutter.keep_local_envs_in_vcs }}".lower() == "y":
-        append_to_gitignore_file("!.envs/.local/")
+    if "{{ cookiecutter.use_docker }}".lower() == "n" and "{{ cookiecutter.use_heroku }}".lower() == "n":
+        if "{{ cookiecutter.keep_local_envs_in_vcs }}".lower() == "y":
+            print(
+                INFO + ".env(s) are only utilized when Docker Compose and/or "
+                "Heroku support is enabled so keeping them does not "
+                "make sense given your current setup." + TERMINATOR
+            )
+        remove_envs_and_associated_files()
+    else:
+        append_to_gitignore_file(".env")
+        append_to_gitignore_file(".envs/*")
+        if "{{ cookiecutter.keep_local_envs_in_vcs }}".lower() == "y":
+            append_to_gitignore_file("!.envs/.local/")
 
     if "{{ cookiecutter.frontend_pipeline }}" in ["None", "Django Compressor"]:
         remove_gulp_files()
@@ -531,7 +525,10 @@ def main():
     if "{{ cookiecutter.use_precommit }}".lower() == "y":
         install_precommit()
     else:
-        print("You will now need to manually initialize a git repository and install pre-commit hooks.")
+        print(
+            INFO + "You will now need to manually initialize a git repository and "
+            "install pre-commit hooks." + TERMINATOR
+        )
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 
