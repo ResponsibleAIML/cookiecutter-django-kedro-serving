@@ -430,6 +430,11 @@ def install_precommit():
     os.system("pre-commit gc")
 
 
+def run_npm_install():
+    print("Installing dependencies with npm...")
+    os.system("npm install")
+
+
 def main():
     debug = "{{ cookiecutter.debug }}".lower() == "y"
 
@@ -529,6 +534,9 @@ def main():
             INFO + "You will now need to manually initialize a git repository and "
             "install pre-commit hooks." + TERMINATOR
         )
+
+    if "{{ cookiecutter.frontend_pipeline }}" == "Webpack":
+        run_npm_install()
 
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 
