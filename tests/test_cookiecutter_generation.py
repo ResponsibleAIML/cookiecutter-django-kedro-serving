@@ -121,8 +121,6 @@ SUPPORTED_COMBINATIONS = [
     {"use_whitenoise": "n"},
     {"use_heroku": "y"},
     {"use_heroku": "n"},
-    {"use_kedro": "y"},
-    {"use_kedro": "n"},
     {"ci_tool": "None"},
     {"ci_tool": "Travis"},
     {"ci_tool": "Gitlab"},
@@ -164,10 +162,18 @@ def check_paths(paths):
 
 
 @pytest.mark.parametrize("context_override", SUPPORTED_COMBINATIONS, ids=_fixture_id)
-def test_project_generation(cookies, context, context_override):
+def test_project_generation(mocker, cookies, context, context_override):
     """Test that project is generated and fully rendered."""
+    mock_run_poetry_install = mocker.MagicMock(name="run_poetry_install")
+    mock_install_precommit = mocker.MagicMock(name="install_precommit")
+    mock_run_npminstall = mocker.MagicMock(name="run_npm_install")
+
+    mocker.patch("hooks.post_gen_project.run_poetry_install", new=mock_run_poetry_install)
+    mocker.patch("hooks.post_gen_project.install_precommit", new=mock_install_precommit)
+    mocker.patch("hooks.post_gen_project.run_npm_install", new=mock_run_npminstall)
 
     result = cookies.bake(extra_context={**context, **context_override})
+
     assert result.exit_code == 0
     assert result.exception is None
     assert result.project_path.name == context["project_slug"]

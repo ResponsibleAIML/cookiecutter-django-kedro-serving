@@ -14,16 +14,22 @@ norecursedirs = [
 
 # ==== black ====
 [tool.black]
-line-length = 119
-target-version = ['py311']
+line-length = 120
+target-version = ['py39']
 
 
 # ==== isort ====
 [tool.isort]
 profile = "black"
-line_length = 119
+line_length = 120
 known_first_party = [
     "tests",
     "scripts",
     "hooks",
 ]
+
+
+# ==== flake8 ====
+[tool.flake8]
+max-line-length = 120
+exclude = [".tox",".git","*/migrations/*","*/static/CACHE/*","docs","node_modules","venv",".venv"]

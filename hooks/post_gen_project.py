@@ -522,22 +522,6 @@ def main():
     if "{{ cookiecutter.use_async }}".lower() == "n":
         remove_async_files()
 
-    if "{{ cookiecutter.use_poetry }}".lower() == "y":
-        run_poetry_install()
-    else:
-        print("You will now need to manually install the dependencies with your preferred tool.")
-
-    if "{{ cookiecutter.use_precommit }}".lower() == "y":
-        install_precommit()
-    else:
-        print(
-            INFO + "You will now need to manually initialize a git repository and "
-            "install pre-commit hooks." + TERMINATOR
-        )
-
-    if "{{ cookiecutter.frontend_pipeline }}" == "Webpack":
-        run_npm_install()
-
     print(SUCCESS + "Project initialized, keep up the good work!" + TERMINATOR)
 
 
