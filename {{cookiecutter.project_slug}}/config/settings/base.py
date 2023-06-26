@@ -50,7 +50,7 @@ DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES = {
     "default": env.db(
         "DATABASE_URL",
-        default="postgres://{% if cookiecutter.windows == 'y' %}localhost{% endif %}/{{cookiecutter.project_slug}}",
+        default="sqlite:///djangodb_/{{cookiecutter.project_slug}}.sqlite",
     ),
 }
 {%- endif %}
