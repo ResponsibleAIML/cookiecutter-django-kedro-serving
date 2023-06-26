@@ -24,6 +24,12 @@ ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["{{ cookiecutter.domai
 
 # DATABASES
 # ------------------------------------------------------------------------------
+DATABASES["default"].update(
+    env.db(
+        "DATABASE_URL",
+        default="postgres://{% if cookiecutter.windows == 'y' %}localhost{% endif %}/{{cookiecutter.project_slug}}",
+    )
+)
 DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa: F405
 
 # CACHES
