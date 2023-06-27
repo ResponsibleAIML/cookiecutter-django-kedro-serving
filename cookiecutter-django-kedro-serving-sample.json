@@ -28,6 +28,8 @@
     "keep_local_envs_in_vcs": "y",
     "debug": "y",
     "_template": "git@github.com:ResponsibleAIML/cookiecutter-django-kedro-serving.git",
-    "_output_dir": "/home/millsks/UserLocal/projects"
+    "_copy_without_render": [
+      "*node/*"
+    ]
   }
 }
