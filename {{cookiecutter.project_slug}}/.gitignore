@@ -353,5 +353,6 @@ vendors.js
 webpack-stats.json
 {%- endif %}
 
-*/node/alias
-*/node/versions
+/node/alias/
+/node/versions/
+/node/test/
